@@ -1,15 +1,26 @@
+#![allow(
+    unused_variables,
+    unused_imports,
+    dead_code
+)]
+
 // mod lib;
 mod events;
+mod birthday;
 
+use std::collections;
 use std::env;
+use std::env::Args;
+use std::vec;
 use events::Category;
 use events::Month;
 use events::MonthDay;
 use events::Date;
 use events::Event;
+use chrono::prelude::*;
+use birthday::*;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
     let events = vec![
         // existing
         Event::new(
@@ -25,7 +36,7 @@ fn main() {
         Event::new(
             Date::new(1991, Month::January, 17),
             String::from("Operaatio Desert Storm, Yhdysvallat sekoilee"),
-            Category::from_primary("History"),
+            Category::new("History", "USA"),
         ),
         Event::new(
             Date::new(1919, Month::January, 18),
@@ -40,7 +51,7 @@ fn main() {
         Event::new(
             Date::new(2009, Month::January, 20),
             String::from("Obama presidentiksi"),
-            Category::from_primary("History"),
+            Category::new("History", "USA"),
         ),
         Event::new(
             Date::new(1793, Month::January, 21),
@@ -65,7 +76,8 @@ fn main() {
         Event::new(
             Date::new(1848, Month::January, 24),
             String::from("Kultalöytö Sutter’s Millissä, Kalifornia – kultaryntäys alkaa"),
-            Category::from_primary("History"),
+            Category::new("History", "USA"),
+
         ),
         Event::new(
             Date::new(1908, Month::January, 24),
@@ -135,18 +147,38 @@ fn main() {
         Event::new(
             Date::new(1943, Month::January, 18),
             String::from("Leningradin piiritys murrettu"),
-            Category::new("History", "General"),
+            Category::new("History", "Russia"),
         ),
     ];
 
-    /*
-    Muuta aiempaa ohjelmaasi / tee uusi ohjelma siten, että se poimii tapahtumien joukosta ne, 
-    jotka osuvat aikavälille 15.1.-29.1. minä vuonna tahansa. 
-    Jos teit tehtävän 2, ota sieltä aikavälin 15.-22.1. tapahtumat, 
-    ja lisää tätä tehtävää varten tapahtumia myös välille 23.1.-29.1.
-    */
-    let start: MonthDay = MonthDay::new(15, Month::January);
-    let end: MonthDay = MonthDay::new(29, Month::January);
-    events::get_events_between_dates(start, end, &events);
+    let args: Vec<String> = env::args().collect();
+
+    // CAN BE USED TO TEST THIS PROGRAM THROUGH COMMAND LINE INSTEAD OF ENVIRONMENT VARIABLES
+    //let birthday_date: NaiveDate = get_birthday_from_env(Some(args[1].to_owned()));
     
+    // the actual environment variable using call for function 
+    let birthday_date: NaiveDate = get_birthday_from_env(None);
+
+    let today: NaiveDate = Local::now().date_naive();
+    
+    if today.day() == birthday_date.day() && today.month() == birthday_date.month() {
+        print!("Happy birthday!\n");
+    }
+
+    let day_difference: i32 = today.to_epoch_days() - birthday_date.to_epoch_days();
+    if day_difference > 0 {
+        print!("You are {} days old!\n", day_difference);
+    }
+    else if day_difference == 0 {
+        print!("Looks like you're new here\n");
+    }
+    else {
+        print!("Are you from the future?\n");
+    }
+
+
+    if day_difference % 1000 == 0 && day_difference != 0 {
+        print!("That's a nice, round number!\n");
+    }
+
 }

@@ -1,3 +1,9 @@
+#![allow(
+    unused_variables,
+    unused_imports,
+    dead_code
+)]
+
 // pub
 #[derive(Debug, PartialEq, Copy, Clone)]
 pub enum Month {

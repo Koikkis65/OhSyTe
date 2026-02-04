@@ -25,11 +25,12 @@ fn print_events_for_date(date_to_print: (u16, u16, u16), events: &[(i32, &str); 
         println!("no events for given date");
     }
 }
+
 /* 
 Give tuple in format <month, start_day, end_day> 
 Does not take into account month changes, but neither does anything else in this code
 */
- fn print_full_weeks_events(day_range: (u32, u32), events: &[(i32, &str); 12]) {
+fn print_full_weeks_events(day_range: (u32, u32), events: &[(i32, &str); 12]) {
     let mut any_luck: bool = false;
     for day in day_range.0..day_range.1 {
         let day_tuple: (u16, u16, u16) = split_date(day.to_string());

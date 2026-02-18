@@ -103,6 +103,30 @@ impl fmt::Display for Event {
     }
 }
 
+// Yksikkötestit category-tietotyypille
+#[cfg(test)]
+mod tests {
+    use crate::Category;
+    #[test]
+    fn test_category_new() {
+        let cat = Category::new("programming", "rust");
+        assert_eq!(cat.primary, "programming");
+        assert_eq!(cat.secondary, Some("rust".to_string()));
+    }
+    #[test]
+    fn test_category_from_primary() {
+        let cat = Category::from_primary("programming");
+        assert_eq!(cat.primary, "programming");
+        assert_eq!(cat.secondary, None);
+    }
+    #[test]
+    fn test_category_from_str() {
+        let cat1 = Category::from_str("programming/rust");
+        assert_eq!(cat1.primary, "programming");
+        assert_eq!(cat1.secondary, Some("rust".to_string()));
+    }
+} 
+
 fn main() {
     let mut events: Vec<Event> = Vec::new();
     events.push(Event::new_singular(

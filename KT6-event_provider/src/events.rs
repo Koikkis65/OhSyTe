@@ -1,9 +1,3 @@
-#![allow(
-    unused_variables,
-    unused_imports,
-    dead_code
-)]
-
 use std::fmt;
 use chrono::{NaiveDate, Datelike};
 
@@ -40,8 +34,8 @@ enum EventKind {
 #[derive(Debug)]
 pub struct Event {
     kind: EventKind,
-    description: String,
-    category: Category,
+    pub description: String,
+    pub category: Category,
 }
 
 #[derive(Debug, PartialEq)]
@@ -52,8 +46,8 @@ pub struct MonthDay {
 
 #[derive(Debug)]
 pub struct Category {
-    primary: String,
-    secondary: Option<String>,
+    pub primary: String,
+    pub secondary: Option<String>,
 }
 
 // IMPLEMENTATIONS

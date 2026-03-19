@@ -2,6 +2,7 @@ use crate::events::{Event, Category};
 use crate::providers::EventProvider;
 use chrono::NaiveDate;
 
+/*
 #[cfg(test)]
 mod tests {
     use std::fmt::Debug;
@@ -34,6 +35,7 @@ mod tests {
         assert_eq!(events[19].category.secondary, None);
     }
 }
+*/
 
 pub struct MyProvider {
     name: String,

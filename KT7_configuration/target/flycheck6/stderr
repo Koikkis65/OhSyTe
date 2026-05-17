@@ -1,0 +1,60 @@
+   0.018303900s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint: fingerprint error for KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration)/Check { test: false }/TargetInner { name: "KT7_configuration", doc: true, ..: with_path("C:\\Users\\jerel\\source\\repos\\OhSyTe\\KT7_configuration\\src\\main.rs", Edition2024) }
+   0.018384900s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint:     err: failed to read `C:\Users\jerel\source\repos\OhSyTe\KT7_configuration\target\debug\.fingerprint\KT7_configuration-2f2a30cefa948a17\bin-KT7_configuration`
+
+Caused by:
+    Määritettyä tiedostoa ei löydy. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+   0.034356000s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint: fingerprint error for KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration)/Check { test: true }/TargetInner { name: "KT7_configuration", doc: true, ..: with_path("C:\\Users\\jerel\\source\\repos\\OhSyTe\\KT7_configuration\\src\\main.rs", Edition2024) }
+   0.034408800s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint:     err: failed to read `C:\Users\jerel\source\repos\OhSyTe\KT7_configuration\target\debug\.fingerprint\KT7_configuration-3f636350acf933db\test-bin-KT7_configuration`
+
+Caused by:
+    Määritettyä tiedostoa ei löydy. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+    Checking KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration)
+error: could not compile `KT7_configuration` (bin "KT7_configuration") due to 4 previous errors; 2 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `KT7_configuration` (bin "KT7_configuration" test) due to 4 previous errors; 3 warnings emitted

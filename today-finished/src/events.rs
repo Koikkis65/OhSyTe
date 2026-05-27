@@ -42,8 +42,8 @@ pub struct Event {
 
 #[derive(Debug, PartialEq, Clone, Hash, Eq)]
 pub struct MonthDay {
-    month: u32,
     day: u32,
+    month: u32,
 }
 
 #[derive(Debug, Clone, PartialEq, Hash, Eq)]
@@ -93,12 +93,18 @@ impl MonthDay {
         Self { day, month }
     }
     pub fn from_str(s: &str) -> Self {
-        let month_day: Vec<&str> = s.split("-").collect();
-        if month_day.len() != 2 {
-            panic!("Invalid date format. Expected MMDD.");
+        if let Some((day, month)) = s.split_once('-') {
+            let day = day.parse::<u32>().expect("Invalid day format. Expected DD.");
+            let month = month.parse::<u32>().expect("Invalid month format. Expected MM.");
+            return Self { day, month };
         }
-        let month = month_day[0].parse::<u32>().expect("Invalid month format. Expected MM.");
-        let day = month_day[1].parse::<u32>().expect("Invalid day format. Expected DD.");
+
+        if s.len() != 4 {
+            panic!("Invalid date format. Expected DDMM or DD-MM.");
+        }
+
+        let day = s[0..2].parse::<u32>().expect("Invalid day format. Expected DD.");
+        let month = s[2..4].parse::<u32>().expect("Invalid month format. Expected MM.");
         Self { day, month }
     }
 }
@@ -116,7 +122,7 @@ impl Category {
             secondary: None,
         }
     }
-    fn from_str(s: &str) -> Category {
+    pub fn from_str(s: &str) -> Category {
         let parts: Vec<&str> = s.split("/").collect();
 
         if parts.len() < 2 {

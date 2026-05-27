@@ -3,6 +3,7 @@
 use serde::Deserialize;
 use std::path::Path;
 use std::error::Error;
+use std::io;
 
 pub mod events;
 pub mod providers;
@@ -15,6 +16,8 @@ use filters::{EventFilter, FilterBuilder};
 use crate::providers::{EventProvider, SimpleProvider};
 use crate::providers::{
     sqlite::SQLiteProvider,
+    textfile::TextFileProvider,
+    csv::CSVFileProvider
 };
 
 
@@ -37,20 +40,15 @@ fn create_providers(config: &Config, config_path: &Path) -> Vec::<Box<dyn EventP
     for cfg in config.providers.iter() {
         let path = config_path.join(&cfg.resource);
         match cfg.kind.as_str() {
-            /*
             "text" => {
                 let provider = TextFileProvider::new(&cfg.name, &path);
                 providers.push(Box::new(provider));
             },
+            
             "csv" => {
                 let provider = CSVFileProvider::new(&cfg.name, &path);
                 providers.push(Box::new(provider));
             },
-            "web" => {
-                let provider = WebProvider::new(&cfg.name, &cfg.resource);
-                providers.push(Box::new(provider));
-            },
-            */
             "sqlite" => {
                 let provider = SQLiteProvider::new(&cfg.name, &path);
                 providers.push(Box::new(provider));
@@ -61,17 +59,60 @@ fn create_providers(config: &Config, config_path: &Path) -> Vec::<Box<dyn EventP
         }
     }
 
-    let test_provider = SimpleProvider::new("test");
-    providers.push(Box::new(test_provider));
-
     providers
 }
 
-pub fn run(config: &Config, config_path: &Path, filter: &EventFilter) -> Result<(), Box<dyn Error>> {
+pub fn list_providers(config: &Config) {
+    for provider in config.providers.iter() {
+        println!("{} ({}) -> {}", provider.name, provider.kind, provider.resource);
+    }
+}
+
+pub fn add_event_to_provider(
+    config: &Config,
+    config_path: &Path,
+    provider_name: &str,
+    date: NaiveDate,
+    description: &str,
+    category: &Category,
+) -> Result<(), Box<dyn Error>> {
+    let provider_config = config
+        .providers
+        .iter()
+        .find(|provider| provider.name == provider_name)
+        .ok_or_else(|| {
+            io::Error::new(
+                io::ErrorKind::NotFound,
+                format!("Unknown provider '{}'", provider_name),
+            )
+        })?;
+
+    let path = config_path.join(&provider_config.resource);
+    match provider_config.kind.as_str() {
+        "text" => {
+            let provider = crate::providers::textfile::TextFileProvider::new(&provider_config.name, &path);
+            provider.add_event(date, description, category)
+        }
+        "csv" => {
+            let provider = crate::providers::csv::CSVFileProvider::new(&provider_config.name, &path);
+            provider.add_event(date, description, category)
+        }
+        "sqlite" => Err(Box::new(io::Error::new(
+            io::ErrorKind::Unsupported,
+            format!("Adding events is not supported for SQL provider '{}'", provider_config.name),
+        ))),
+        _ => Err(Box::new(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            format!("Unable to make provider: {:?}", provider_config),
+        ))),
+    }
+}
+
+pub fn run(config: &Config, config_path: &Path, filter: &EventFilter, exclude_categories: &Vec<String>) -> Result<(), Box<dyn Error>> {
     let mut events: Vec<Event> = Vec::new();
 
     let today: NaiveDate = Local::now().date_naive();
-    let today_month_day = MonthDay::new(today.month(), today.day());
+    let today_month_day = MonthDay::new(today.day(), today.month());
 
     let providers = create_providers(config, config_path);
 
@@ -87,7 +128,7 @@ pub fn run(config: &Config, config_path: &Path, filter: &EventFilter) -> Result<
     }
 
     for event in events {
-        if filter.accepts(&event) {
+        if filter.accepts(&event) && !exclude_categories.contains(&event.category().to_string()) {
             println!("{}", event);
         }
     }

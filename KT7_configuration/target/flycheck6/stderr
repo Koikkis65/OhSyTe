@@ -1,8 +1,12 @@
-   0.018303900s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint: fingerprint error for KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration)/Check { test: false }/TargetInner { name: "KT7_configuration", doc: true, ..: with_path("C:\\Users\\jerel\\source\\repos\\OhSyTe\\KT7_configuration\\src\\main.rs", Edition2024) }
-   0.018384900s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint:     err: failed to read `C:\Users\jerel\source\repos\OhSyTe\KT7_configuration\target\debug\.fingerprint\KT7_configuration-2f2a30cefa948a17\bin-KT7_configuration`
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   0.282694400s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (D:\Coding\rustzone\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint: fingerprint error for KT7_configuration v0.1.0 (D:\Coding\rustzone\OhSyTe\KT7_configuration)/Check { test: false }/TargetInner { name: "KT7_configuration", doc: true, ..: with_path("D:\\Coding\\rustzone\\OhSyTe\\KT7_configuration\\src\\main.rs", Edition2024) }
+   0.282741300s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (D:\Coding\rustzone\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint:     err: failed to read `D:\Coding\rustzone\OhSyTe\KT7_configuration\target\debug\.fingerprint\KT7_configuration-2f2a30cefa948a17\bin-KT7_configuration`
 
 Caused by:
-    Määritettyä tiedostoa ei löydy. (os error 2)
+    The system cannot find the file specified. (os error 2)
 
 Stack backtrace:
    0: git_midx_writer_dump
@@ -26,11 +30,11 @@ Stack backtrace:
   18: git_midx_writer_dump
   19: BaseThreadInitThunk
   20: RtlUserThreadStart
-   0.034356000s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint: fingerprint error for KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration)/Check { test: true }/TargetInner { name: "KT7_configuration", doc: true, ..: with_path("C:\\Users\\jerel\\source\\repos\\OhSyTe\\KT7_configuration\\src\\main.rs", Edition2024) }
-   0.034408800s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint:     err: failed to read `C:\Users\jerel\source\repos\OhSyTe\KT7_configuration\target\debug\.fingerprint\KT7_configuration-3f636350acf933db\test-bin-KT7_configuration`
+   0.303326600s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (D:\Coding\rustzone\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint: fingerprint error for KT7_configuration v0.1.0 (D:\Coding\rustzone\OhSyTe\KT7_configuration)/Check { test: true }/TargetInner { name: "KT7_configuration", doc: true, ..: with_path("D:\\Coding\\rustzone\\OhSyTe\\KT7_configuration\\src\\main.rs", Edition2024) }
+   0.303350400s  INFO prepare_target{force=false package_id=KT7_configuration v0.1.0 (D:\Coding\rustzone\OhSyTe\KT7_configuration) target="KT7_configuration"}: cargo::core::compiler::fingerprint:     err: failed to read `D:\Coding\rustzone\OhSyTe\KT7_configuration\target\debug\.fingerprint\KT7_configuration-3f636350acf933db\test-bin-KT7_configuration`
 
 Caused by:
-    Määritettyä tiedostoa ei löydy. (os error 2)
+    The system cannot find the file specified. (os error 2)
 
 Stack backtrace:
    0: git_midx_writer_dump
@@ -54,7 +58,7 @@ Stack backtrace:
   18: git_midx_writer_dump
   19: BaseThreadInitThunk
   20: RtlUserThreadStart
-    Checking KT7_configuration v0.1.0 (C:\Users\jerel\source\repos\OhSyTe\KT7_configuration)
+    Checking KT7_configuration v0.1.0 (D:\Coding\rustzone\OhSyTe\KT7_configuration)
 error: could not compile `KT7_configuration` (bin "KT7_configuration") due to 4 previous errors; 2 warnings emitted
 warning: build failed, waiting for other jobs to finish...
 error: could not compile `KT7_configuration` (bin "KT7_configuration" test) due to 4 previous errors; 3 warnings emitted

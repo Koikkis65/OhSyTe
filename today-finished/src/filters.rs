@@ -17,7 +17,6 @@ Should be 13 tests total
 #[cfg(test)]
 mod tests {
     use super::*;
-    use KT9_eventFiltering::events::Month;
     use chrono::{Datelike, Local, NaiveDate};
 
     #[test]
